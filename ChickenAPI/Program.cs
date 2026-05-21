@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ChickenAPI.Model;
+
 namespace ChickenAPI
 {
     public class Program
@@ -8,41 +9,38 @@ namespace ChickenAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // ✅ FIXED DbContext configuration
             builder.Services.AddDbContext<FarmDbContext>(options =>
-            options.UseSqlServer(Environment.GetEnvironmentVariable("SQL CONNECTION STRING")));
-
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("DefaultConnection")
+                )
+            );
 
             builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (true)
-
+            // ✅ OPTIONAL: Auto-create DB tables (prevents CI failures)
+            using (var scope = app.Services.CreateScope())
             {
+                var db = scope.ServiceProvider.GetRequiredService<FarmDbContext>();
+                db.Database.Migrate();
+            }
 
-                app.MapOpenApi(); // Generates /openapi/v1.json
+            if (true)
+            {
+                app.MapOpenApi();
 
                 app.UseSwaggerUI(options =>
-
                 {
-
-                    // Tell Swagger UI to look at the native .NET OpenAPI endpoint 
                     options.SwaggerEndpoint("/openapi/v1.json", "Chicken API v1");
                     options.RoutePrefix = "swagger";
-
                 });
-
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();
