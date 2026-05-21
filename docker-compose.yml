@@ -10,6 +10,7 @@ services:
       MSSQL_PID: "Express"
     ports:
       - "1433:1433"
+      - "1400:1433"
     volumes:
       - db_data:/var/opt/mssql
     restart: unless-stopped
@@ -19,8 +20,8 @@ services:
   mvc-service:
     build:
       context: .
-      dockerfile: ./ChickMVC/Dockerfile   # ✅ FIXED (was wrong)
-    container_name: mvc-chick-service
+      dockerfile: ./ChickMVC/Dockerfile
+    container_name: mvc-chick-service-magic
     environment:
       SQL_CONNECTION_STRING: "Server=chick-db-service;Database=Farm;User Id=sa;Password=Password1!;Encrypt=False;TrustServerCertificate=True;"
     ports:
