@@ -25,6 +25,6 @@ namespace ChickMVC.Controllers
             return View();
         }
 
-       
+
     }
 }

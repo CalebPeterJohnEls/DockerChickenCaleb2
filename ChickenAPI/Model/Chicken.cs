@@ -12,24 +12,24 @@ namespace ChickenAPI.Model
 
         [Required]
         [MaxLength(50)]
-        public string Name {get; set; }
+        public string Name { get; set; }
 
         [Required]
         [MaxLengthAttribute(50)]
-        public string Breed {get;set;}
+        public string Breed { get; set; }
 
-        [Range(0,100)]//Assusing they wont live past 50
+        [Range(0, 100)]//Assusing they wont live past 50
 
         [Column(TypeName = "decimal(5,2)")]
-        public int Age {get;set;}
+        public int Age { get; set; }
 
         [Range(0, 100)] // eggs per day
-        public decimal EggProduction {get; set;}
+        public decimal EggProduction { get; set; }
 
         [Required]
-        public bool IsPregnant {get; set; }
+        public bool IsPregnant { get; set; }
 
         [Required]
-        public DateTime LastVetCheck { get; set;}
+        public DateTime LastVetCheck { get; set; }
     }
 }

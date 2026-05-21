@@ -6,18 +6,18 @@ namespace ChickenAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class EggController:Controller
+    public class EggController : Controller
     {
-    [HttpGet("/GetMeEggs")]
-    public ActionResult GetEggs()
+        [HttpGet("/GetMeEggs")]
+        public ActionResult GetEggs()
 
-    {
+        {
 
-    return Ok("Here are some eggs! :)");
+            return Ok("Here are some eggs! :)");
+
+        }
+
+
 
     }
-
-
-    
-}
 }

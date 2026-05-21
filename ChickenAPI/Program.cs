@@ -9,7 +9,7 @@ namespace ChickenAPI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddDbContext<FarmDbContext> (options =>
+            builder.Services.AddDbContext<FarmDbContext>(options =>
             options.UseSqlServer(Environment.GetEnvironmentVariable("SQL CONNECTION STRING")));
 
 
@@ -24,17 +24,17 @@ namespace ChickenAPI
 
             {
 
-            app.MapOpenApi(); // Generates /openapi/v1.json
+                app.MapOpenApi(); // Generates /openapi/v1.json
 
-            app.UseSwaggerUI(options =>
+                app.UseSwaggerUI(options =>
 
-            {
+                {
 
-            // Tell Swagger UI to look at the native .NET OpenAPI endpoint 
-            options.SwaggerEndpoint("/openapi/v1.json", "Chicken API v1"); 
-            options.RoutePrefix = "swagger";
+                    // Tell Swagger UI to look at the native .NET OpenAPI endpoint 
+                    options.SwaggerEndpoint("/openapi/v1.json", "Chicken API v1");
+                    options.RoutePrefix = "swagger";
 
-            });
+                });
 
             }
 
